@@ -1,0 +1,30 @@
+[project]
+name = "rerun-realsense"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.2.6",
+    "pynput>=1.8.1",
+    "pyrealsense2>=2.56.5.9235",
+    "rerun-sdk==0.21.0",
+    "scipy>=1.15.3",
+    "zarr>=2.18.3",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.19.1",
+    "pytest>=9.0.2",
+    "ruff>=0.14.14",
+]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I"] # Error, Flake8, Isort (sorts imports)
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+ignore_missing_imports = true # Useful for pyrealsense2 which lacks type stubs
