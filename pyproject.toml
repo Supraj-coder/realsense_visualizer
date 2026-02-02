@@ -8,6 +8,7 @@ dependencies = [
     "numpy>=2.2.6",
     "pynput>=1.8.1",
     "pyrealsense2>=2.56.5.9235",
+    "pytest>=9.0.2",
     "rerun-sdk==0.21.0",
     "scipy>=1.15.3",
     "zarr>=2.18.3",
@@ -17,14 +18,22 @@ dependencies = [
 dev = [
     "mypy>=1.19.1",
     "pytest>=9.0.2",
+    "pyyaml>=6.0.3",
     "ruff>=0.14.14",
 ]
 
 [tool.ruff]
-line-length = 100
+line-length = 120
+
+[tool.ruff.lint]
 select = ["E", "F", "I"] # Error, Flake8, Isort (sorts imports)
 
 [tool.mypy]
 python_version = "3.12"
 strict = true
 ignore_missing_imports = true # Useful for pyrealsense2 which lacks type stubs
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+python_files = "test_*.py"
