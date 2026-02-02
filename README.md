@@ -27,6 +27,7 @@ This tool provides synchronized logging of Color, Depth, and IMU data to Zarr fo
 
 4. **Record Data**
    Connect your RealSense camera (must use a USB 3.0 and above cable) and run the following to visualize and save data:
+   (Make sure to orient the camera properly before starting to record)
    ```bash
    uv run main.py --mode record --path /path/to/my_data.zarr
   Press Ctrl+C to stop recording and finish writing data to disk.
@@ -71,3 +72,4 @@ pytest (Note: we use PYTHONPATH="." to prevent ROS 2 system paths from interferi
 
 
    
+
