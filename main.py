@@ -4,7 +4,7 @@ import threading
 import time
 from dataclasses import dataclass
 from pathlib import Path
-
+from typing import Any, Tuple
 import numpy as np
 import pyrealsense2 as rs
 import rerun as rr
@@ -31,31 +31,31 @@ class CameraConfig:
 
     # Properties for Zarr dataset shapes
     @property
-    def color_shape(self):
+    def color_shape(self)-> Tuple[int, int, int, int]:
         return (0, self.height, self.width, self.color_channels)
 
     @property
-    def color_chunks(self):
+    def color_chunks(self)-> Tuple[int, int, int, int]:
         return (self.chunk_size_frames, self.height, self.width, self.color_channels)
 
     @property
-    def depth_shape(self):
+    def depth_shape(self)-> Tuple[int, int, int]:
         return (0, self.height, self.width)
 
     @property
-    def depth_chunks(self):
+    def depth_chunks(self)-> Tuple[int, int, int]:
         return (self.chunk_size_frames, self.height, self.width)
 
     @property
-    def rot_shape(self):
+    def rot_shape(self)-> Tuple[int, int]:
         return (0, self.quat_components)
 
     @property
-    def rot_chunks(self):
+    def rot_chunks(self)-> Tuple[int, int]:
         return (self.meta_chunk_size, self.quat_components)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", type=str, choices=["record", "play"], required=True)
     parser.add_argument("--path", type=str, required=True)
@@ -118,10 +118,10 @@ def main():
             }
         )
 
-        frame_queue = queue.Queue(maxsize=128)
+        frame_queue: queue.Queue[Any] = queue.Queue(maxsize=128)
         stop_event = threading.Event()
 
-        def writer_worker():
+        def writer_worker() -> None:
             count = 0
             while not stop_event.is_set() or not frame_queue.empty():
                 try:
