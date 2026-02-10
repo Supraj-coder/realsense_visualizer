@@ -101,7 +101,7 @@ def main() -> None:
         ts_ds = root.create_dataset("timestamp", shape=(0,), chunks=(cfg.meta_chunk_size,), dtype="float64")
         rot_ds = root.create_dataset("rotation", shape=cfg.rot_shape, chunks=cfg.rot_chunks, dtype="float32")
 
-        # Save FPS to metadata so Playback knows the speed
+        # Saved FPS to metadata so Playback knows the speed
         root.attrs.update(
             {
                 "intrinsics": {
